@@ -1,117 +1,331 @@
+Here is the complete, updated `index.html` code for your **BookBug** website. It includes all four book slots ("The First Adventure", "Mastering The Craft", "The Tomorrow Trap", and your new fourth book) beautifully organized in the layout.
+
+You can select the entire block below, copy it, and use it to replace the current contents of your file before uploading it to GitHub.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BookBug - Digital E-Book Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookBug | eBook Storefront</title>
+    <style>
+        /* Modern Color Palette & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
-}
+        :root {
+            --primary: #2e7d32; /* Soft bookish green */
+            --primary-dark: #1b5e20;
+            --accent: #ff6f00; /* Warm orange for buttons */
+            --accent-hover: #e65100;
+            --bg-light: #f9f9f9;
+            --text-dark: #333333;
+            --text-muted: #666666;
+        }
 
-header{
-    background:#6a1b9a;
-    color:white;
-    text-align:center;
-    padding:30px;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-.hero{
-    text-align:center;
-    padding:40px 20px;
-}
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-.book-card{
-    max-width:400px;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-    text-align:center;
-}
+        /* Navigation Bar */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-.book-cover{
-    width:200px;
-    height:280px;
-    background:#ddd;
-    margin:auto;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-}
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.price{
-    font-size:28px;
-    color:#6a1b9a;
-    font-weight:bold;
-    margin:15px 0;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
 
-.buy-btn{
-    background:#6a1b9a;
-    color:white;
-    text-decoration:none;
-    padding:12px 25px;
-    border-radius:8px;
-    display:inline-block;
-    font-size:18px;
-}
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
 
-.buy-btn:hover{
-    opacity:0.9;
-}
+        nav a:hover {
+            color: var(--primary);
+        }
 
-footer{
-    text-align:center;
-    padding:20px;
-    background:#222;
-    color:white;
-    margin-top:50px;
-}
-</style>
+        /* Hero Banner Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513001900722-370f803f498d?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+
+        /* Books Grid Layout */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        .book-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .book-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .book-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            flex: 1;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* About Author Section */
+        .about-section {
+            background-color: var(--bg-light);
+            padding: 60px 20px;
+        }
+
+        .author-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .author-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222222;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+
+        /* Responsive design for mobile screens */
+        @media (max-width: 768px) {
+            .author-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>📚 BookBug</h1>
-    <p>Buy the latest books by your author</p>
-</header>
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">🐛 BookBug</a>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#books">Our eBooks</a>
+                <a href="#author">The Author</a>
+            </nav>
+        </div>
+    </header>
 
-<section class="hero">
-    <h2>Featured E-Book</h2>
-</section>
+    <!-- Welcome Banner Section -->
+    <section class="hero">
+        <h1>Welcome to BookBug</h1>
+        <p>Explore original, high-quality eBooks and dive into incredible new worlds. Find your next favorite read today.</p>
+    </section>
 
-<div class="book-card">
+    <!-- Books Catalog Grid Section -->
+    <section id="books" class="container">
+        <h2 class="section-title">Featured eBooks</h2>
+        <div class="books-grid">
 
-    <div class="book-cover">
-        E-BOOK
-    </div>
+            <!-- Book Card 1 -->
+            <div class="book-card">
+                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80" alt="Book Cover 1" class="book-cover">
+                <div class="book-info">
+                    <h3 class="book-title">The First Adventure</h3>
+                    <p class="book-description">A thrilling journey into uncharted territory where survival depends on wit, strategy, and a little bit of pure luck. Perfect for fans of fast-paced storytelling.</p>
+                    <div class="button-group">
+                        <!-- Replace # with your Gumroad/Amazon link -->
+                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
 
-    <h2>Out Of The Shadows</h2>
+            <!-- Book Card 2 -->
+            <div class="book-card">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book Cover 2" class="book-cover">
+                <div class="book-info">
+                    <h3 class="book-title">Mastering The Craft</h3>
+                    <p class="book-description">An essential step-by-step guide designed to take you from a complete beginner to a confident creator. Packed with logical breakdowns and clear examples.</p>
+                    <div class="button-group">
+                        <!-- Replace # with your Gumroad/Amazon link -->
+                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
 
-    <p>
-       This one is for the students suffering in the dark,
-       who are not able to express it out.
-    </p>
+            <!-- Book Card 3: The Tomorrow Trap -->
+            <div class="book-card">
+                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="The Tomorrow Trap Cover" class="book-cover">
+                <div class="book-info">
+                    <h3 class="book-title">The Tomorrow Trap</h3>
+                    <p class="book-description">A gripping look into procrastination, memory, and breaking the loops that keep us stuck in the past. Discover how to escape the cycle before time runs out.</p>
+                    <div class="button-group">
+                        <!-- Replace # with your third-party sales link -->
+                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
 
-    <div class="price">₹99</div>
+            <!-- Book Card 4: New Book -->
+            <div class="book-card">
+                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="New Book Cover" class="book-cover">
+                <div class="book-info">
+                    <h3 class="book-title">Your New Book Title</h3>
+                    <p class="book-description">Enter a fascinating summary of your fourth eBook here. Give your readers a quick hook that makes them want to click the buy button.</p>
+                    <div class="button-group">
+                        <!-- Replace # with your sales link -->
+                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
 
-    <a href="YOUR_SELLING_LINK_HERE" class="buy-btn" target="_blank">
-        Buy Now
-    </a>
+        </div>
+    </section>
 
-</div>
+    <!-- About Author Section -->
+    <section id="author" class="about-section">
+        <div class="author-container">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Author Portrait" class="author-img">
+            <div>
+                <h2 style="color: var(--primary); margin-bottom: 15px;">About the Author</h2>
+                <p>Hello! I am the creator behind BookBug. I specialize in writing engaging stories and practical guides that help readers learn new concepts or escape into thrilling worlds. Thank you for supporting independent authors!</p>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    © 2026 BookBug. All Rights Reserved.
-</footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 BookBug. All rights reserved.</p>
+        <p style="color: #888888; font-size: 11px; margin-top: 5px;">All transactions are processed securely via external verified platforms.</p>
+    </footer>
 
 </body>
 </html>
+
+```
