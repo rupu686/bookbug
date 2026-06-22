@@ -1,12 +1,8 @@
-Here is the completely redesigned code for **BookBug**.
+Here is the code to create a single-page website for "The Tomorrow Trap."
 
-I have removed the author portrait image, updated the biography to your exact quote, and completely transformed the visual interface.
+This version uses a dedicated, modern landing page format to maximize focus on your book. I have also used the details from your manuscript to craft the book description, emphasizing the core concepts of procrastination as an emotional problem and your "Five Minute Brutality Rule".
 
-### What's New in This Redesign:
-
-* **Aesthetic Dark Theme:** Switched from the old green/white look to a modern, premium midnight-dark layout (`#0f172a`) with cool electric-indigo and violet neon accents.
-* **Glow Effects:** The book cards now feature soft neon shadows when you hover over them.
-* **Centred Minimalist Bio:** The "About the Author" section is now perfectly centered and text-focused since the image has been removed.
+You can copy the code below, replace the contents of your `index.html` file, and upload it to GitHub.
 
 ```html
 <!DOCTYPE html>
@@ -14,24 +10,25 @@ I have removed the author portrait image, updated the biography to your exact qu
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookBug | Premium eBook Storefront</title>
+    <title>The Tomorrow Trap | Rupam Mondal</title>
     <style>
-        /* Modern Dark Theme Reset */
+        /* Modern CSS Reset & Variables */
+        :root {
+            --bg-base: #0b1121;
+            --bg-surface: #151e32;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-stack: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        :root {
-            --bg-main: #0f172a;       /* Deep slate/midnight background */
-            --bg-card: #1e293b;       /* Lighter slate for cards */
-            --primary: #6366f1;       /* Vivid Indigo */
-            --primary-glow: #4f46e5;
-            --accent: #d946ef;        /* Cyber Violet for highlights */
-            --text-main: #f8fafc;     /* Clean off-white */
-            --text-muted: #94a3b8;    /* Soft silver-grey */
+            font-family: var(--font-stack);
         }
 
         html {
@@ -39,292 +36,254 @@ I have removed the author portrait image, updated the biography to your exact qu
         }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-base);
             color: var(--text-main);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Sleek Navigation Bar */
+        /* Navigation */
         header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 17, 33, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-container {
+        .nav-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 18px 20px;
         }
 
-        .logo {
-            font-size: 22px;
+        .brand-logo {
+            font-size: 24px;
             font-weight: 800;
             color: var(--text-main);
             text-decoration: none;
             letter-spacing: -0.5px;
         }
 
-        .logo span {
-            color: var(--accent);
+        .brand-logo span {
+            color: var(--primary);
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            margin-left: 24px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.2s, text-shadow 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--text-main);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Tech-Style Hero Banner */
+        /* Hero Banner */
         .hero {
+            padding: 80px 20px 60px;
             text-align: center;
-            padding: 120px 20px 80px 20px;
-            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.12) 0%, transparent 50%);
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 2.8rem;
             font-weight: 800;
+            margin-bottom: 15px;
             letter-spacing: -1px;
-            margin-bottom: 16px;
-            background: linear-gradient(to right, #ffffff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 16px;
             color: var(--text-muted);
-            max-width: 540px;
-            margin: 0 auto;
-        }
-
-        /* Layout Grid Container */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px 80px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            letter-spacing: -0.5px;
-            position: relative;
-        }
-
-        /* Minimal Neon Book Cards */
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .book-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.1);
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 360px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .book-info {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .book-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-
-        .book-description {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 24px;
-            flex-grow: 1;
-        }
-
-        /* Futuristic Pill Buttons */
-        .button-group {
-            display: flex;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            flex: 1;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-glow) 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        /* Clean Photo-less Author Section */
-        .about-section {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            background: linear-gradient(to bottom, var(--bg-main), #0b111e);
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .author-container {
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .author-quote {
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--text-main);
-            line-height: 1.6;
-            margin-top: 10px;
-            letter-spacing: -0.3px;
+        /* Main Container - Single Book Layout */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
         }
 
-        .author-label {
-            font-size: 12px;
+        .featured-book-card {
+            background-color: var(--bg-surface);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .book-image-wrapper {
+            flex: 0 0 45%;
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .book-details {
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .book-subtitle {
+            color: var(--primary);
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
+            letter-spacing: 1px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             display: block;
         }
 
-        /* Dark Minimal Footer */
-        footer {
-            background-color: #0b111e;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 13px;
-            color: #475569;
+        .book-title {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
-        /* Responsive Tweaks */
-        @media (max-width: 640px) {
-            .hero h1 { font-size: 36px; }
-            .nav-container { flex-direction: column; gap: 14px; }
-            nav a { margin: 0 12px; }
+        .book-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .book-desc strong {
+            color: var(--text-main);
+        }
+
+        /* Call to Action Button */
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 16px 30px;
+            text-align: center;
+            text-decoration: none;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Author Section */
+        .author-section {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .author-tag {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .author-quote {
+            font-size: 1.5rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-base);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-wrapper { flex-direction: column; gap: 15px; }
+            
+            .featured-book-card {
+                flex-direction: column;
+            }
+            .book-image-wrapper {
+                flex: none;
+            }
+            .book-cover {
+                min-height: 350px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .book-details {
+                padding: 30px 20px;
+            }
+            .book-title {
+                font-size: 1.8rem;
+            }
+            .author-quote { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
-        <div class="nav-container">
-            <a href="#" class="logo">book<span>bug</span></a>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#books">eBooks</a>
-                <a href="#author">Author</a>
-            </nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Book<span>Bug</span></a>
         </div>
     </header>
 
-    <!-- Tech/Minimal Welcome Banner -->
     <section class="hero">
         <h1>Welcome to BookBug</h1>
-        <p>Explore high-quality digital editions and stories crafted to pull you into completely new worlds.</p>
+        <p>A Journey Through the Shadows of Delay to the Light of Execution.</p>
     </section>
 
-    <!-- Two-Book Showroom Section -->
-    <section id="books" class="container">
-        <h2 class="section-title">Featured Releases</h2>
-        <div class="books-grid">
-
-            <!-- Book Card 1 -->
-            <div class="book-card">
-                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80" alt="Book Cover 1" class="book-cover">
-                <div class="book-info">
-                    <h3 class="book-title">The First Adventure</h3>
-                    <p class="book-description">A thrilling journey into uncharted territory where survival depends on wit, strategy, and a little bit of pure luck. Perfect for fans of fast-paced storytelling.</p>
-                    <div class="button-group">
-                        <a href="#" target="_blank" class="btn btn-primary">Get eBook</a>
-                    </div>
-                </div>
+    <main id="book">
+        <div class="featured-book-card">
+            <div class="book-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="The Tomorrow Trap Book Cover" class="book-cover">
             </div>
-
-            <!-- Book Card 2 -->
-            <div class="book-card">
-                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book Cover 2" class="book-cover">
-                <div class="book-info">
-                    <h3 class="book-title">Mastering The Craft</h3>
-                    <p class="book-description">An essential step-by-step guide designed to take you from a complete beginner to a confident creator. Packed with logical breakdowns and clear examples.</p>
-                    <div class="button-group">
-                        <a href="#" target="_blank" class="btn btn-primary">Get eBook</a>
-                    </div>
-                </div>
+            
+            <div class="book-details">
+                <span class="book-subtitle">By Rupam Mondal</span>
+                <h2 class="book-title">The Tomorrow Trap</h2>
+                
+                [cite_start]<p class="book-desc">Procrastination is often mocked as a simple bad habit, but it is a psychological paralysis—an agonizing thriller where the monster is yourself[cite: 23]. [cite_start]<em>The Tomorrow Trap</em> is the raw, unvarnished story of building an elaborate cage called "Tomorrow," and how to break the bars[cite: 20].</p>
+                
+                [cite_start]<p class="book-desc">Learn to conquer the architecture of delay, dismantle your illusions of perfection, and master the <strong>Five Minute Brutality Rule</strong>[cite: 131]. [cite_start]Step out of the cage and build your empire today, or prepare to mourn it tomorrow[cite: 172].</p>
+                
+                <a href="#" target="_blank" class="btn">Get the eBook Now</a>
             </div>
-
         </div>
+    </main>
+
+    <section id="about" class="author-section">
+        <span class="author-tag">The Creator</span>
+        <p class="author-quote">"This is Rupam, I write some stories for you guys to enjoy"</p>
     </section>
 
-    <!-- Redesigned Minimalist Author Section -->
-    <section id="author" class="about-section">
-        <div class="author-container">
-            <span class="author-label">The Creator</span>
-            <p class="author-quote">"This is Rupam, I write some stories for you guys to enjoy"</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 BookBug. Designed for modern readers.</p>
+        <p>&copy; 2026 Rupam Mondal. [cite_start]All rights reserved[cite: 5, 6].</p>
     </footer>
 
 </body>
