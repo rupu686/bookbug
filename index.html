@@ -1,6 +1,12 @@
-Here is the complete, clean `index.html` file tailored down to exactly **two eBooks** using the details from before.
+Here is the completely redesigned code for **BookBug**.
 
-You can copy this entire block of code, overwrite your current file, and save it to your GitHub repository. The layout will automatically adjust to display these two books side-by-side beautifully.
+I have removed the author portrait image, updated the biography to your exact quote, and completely transformed the visual interface.
+
+### What's New in This Redesign:
+
+* **Aesthetic Dark Theme:** Switched from the old green/white look to a modern, premium midnight-dark layout (`#0f172a`) with cool electric-indigo and violet neon accents.
+* **Glow Effects:** The book cards now feature soft neon shadows when you hover over them.
+* **Centred Minimalist Bio:** The "About the Author" section is now perfectly centered and text-focused since the image has been removed.
 
 ```html
 <!DOCTYPE html>
@@ -8,24 +14,24 @@ You can copy this entire block of code, overwrite your current file, and save it
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookBug | eBook Storefront</title>
+    <title>BookBug | Premium eBook Storefront</title>
     <style>
-        /* Modern Color Palette & Reset */
+        /* Modern Dark Theme Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         :root {
-            --primary: #2e7d32; /* Soft bookish green */
-            --primary-dark: #1b5e20;
-            --accent: #ff6f00; /* Warm orange for buttons */
-            --accent-hover: #e65100;
-            --bg-light: #f9f9f9;
-            --text-dark: #333333;
-            --text-muted: #666666;
+            --bg-main: #0f172a;       /* Deep slate/midnight background */
+            --bg-card: #1e293b;       /* Lighter slate for cards */
+            --primary: #6366f1;       /* Vivid Indigo */
+            --primary-glow: #4f46e5;
+            --accent: #d946ef;        /* Cyber Violet for highlights */
+            --text-main: #f8fafc;     /* Clean off-white */
+            --text-muted: #94a3b8;    /* Soft silver-grey */
         }
 
         html {
@@ -33,15 +39,16 @@ You can copy this entire block of code, overwrite your current file, and save it
         }
 
         body {
-            background-color: #ffffff;
-            color: var(--text-dark);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
-        /* Navigation Bar */
+        /* Sleek Navigation Bar */
         header {
-            background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -51,180 +58,207 @@ You can copy this entire block of code, overwrite your current file, and save it
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 18px 20px;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
             text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
         }
 
         nav a {
             text-decoration: none;
-            color: var(--text-dark);
-            margin-left: 20px;
+            color: var(--text-muted);
+            margin-left: 24px;
             font-weight: 500;
-            transition: color 0.2s;
+            font-size: 14px;
+            transition: color 0.2s, text-shadow 0.2s;
         }
 
         nav a:hover {
-            color: var(--primary);
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* Hero Banner Section */
+        /* Tech-Style Hero Banner */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513001900722-370f803f498d?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-            color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px 80px 20px;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
         }
 
         .hero h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 18px;
-            max-width: 600px;
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 540px;
             margin: 0 auto;
         }
 
-        /* Main Content Container */
+        /* Layout Grid Container */
         .container {
-            max-width: 900px; /* Narrowed slightly for a cleaner 2-book layout */
+            max-width: 900px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px 80px 20px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 32px;
+            font-size: 26px;
+            font-weight: 700;
             margin-bottom: 40px;
-            color: var(--primary);
+            letter-spacing: -0.5px;
+            position: relative;
         }
 
-        /* Books Grid Layout */
+        /* Minimal Neon Book Cards */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
         }
 
         .book-card {
-            background: var(--bg-light);
-            border-radius: 8px;
+            background: var(--bg-card);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .book-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.1);
         }
 
         .book-cover {
             width: 100%;
-            height: 400px;
+            height: 360px;
             object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .book-info {
-            padding: 25px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .book-title {
-            font-size: 22px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
 
         .book-description {
             color: var(--text-muted);
             font-size: 14px;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 24px;
             flex-grow: 1;
         }
 
-        /* Buttons */
+        /* Futuristic Pill Buttons */
         .button-group {
             display: flex;
-            gap: 10px;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 20px;
+            padding: 12px 24px;
             text-align: center;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 14px;
             flex: 1;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
 
         .btn-primary {
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-glow) 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-hover);
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
         }
 
-        /* About Author Section */
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Clean Photo-less Author Section */
         .about-section {
-            background-color: var(--bg-light);
-            padding: 60px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(to bottom, var(--bg-main), #0b111e);
+            padding: 80px 20px;
+            text-align: center;
         }
 
         .author-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 40px;
         }
 
-        .author-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .author-quote {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-top: 10px;
+            letter-spacing: -0.3px;
         }
 
-        /* Footer */
+        .author-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Dark Minimal Footer */
         footer {
-            background-color: #222222;
-            color: #ffffff;
+            background-color: #0b111e;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
-            padding: 30px 20px;
-            font-size: 14px;
+            padding: 40px 20px;
+            font-size: 13px;
+            color: #475569;
         }
 
-        /* Responsive design for mobile screens */
-        @media (max-width: 768px) {
-            .author-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .nav-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            nav a {
-                margin: 0 10px;
-            }
+        /* Responsive Tweaks */
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 36px; }
+            .nav-container { flex-direction: column; gap: 14px; }
+            nav a { margin: 0 12px; }
         }
     </style>
 </head>
@@ -233,24 +267,24 @@ You can copy this entire block of code, overwrite your current file, and save it
     <!-- Header Navigation -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">🐛 BookBug</a>
+            <a href="#" class="logo">book<span>bug</span></a>
             <nav>
                 <a href="#">Home</a>
-                <a href="#books">Our eBooks</a>
-                <a href="#author">The Author</a>
+                <a href="#books">eBooks</a>
+                <a href="#author">Author</a>
             </nav>
         </div>
     </header>
 
-    <!-- Welcome Banner Section -->
+    <!-- Tech/Minimal Welcome Banner -->
     <section class="hero">
         <h1>Welcome to BookBug</h1>
-        <p>Explore original, high-quality eBooks and dive into incredible new worlds. Find your next favorite read today.</p>
+        <p>Explore high-quality digital editions and stories crafted to pull you into completely new worlds.</p>
     </section>
 
-    <!-- Books Catalog Grid Section -->
+    <!-- Two-Book Showroom Section -->
     <section id="books" class="container">
-        <h2 class="section-title">Featured eBooks</h2>
+        <h2 class="section-title">Featured Releases</h2>
         <div class="books-grid">
 
             <!-- Book Card 1 -->
@@ -260,8 +294,7 @@ You can copy this entire block of code, overwrite your current file, and save it
                     <h3 class="book-title">The First Adventure</h3>
                     <p class="book-description">A thrilling journey into uncharted territory where survival depends on wit, strategy, and a little bit of pure luck. Perfect for fans of fast-paced storytelling.</p>
                     <div class="button-group">
-                        <!-- Replace # with your Gumroad/Amazon link -->
-                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                        <a href="#" target="_blank" class="btn btn-primary">Get eBook</a>
                     </div>
                 </div>
             </div>
@@ -273,8 +306,7 @@ You can copy this entire block of code, overwrite your current file, and save it
                     <h3 class="book-title">Mastering The Craft</h3>
                     <p class="book-description">An essential step-by-step guide designed to take you from a complete beginner to a confident creator. Packed with logical breakdowns and clear examples.</p>
                     <div class="button-group">
-                        <!-- Replace # with your Gumroad/Amazon link -->
-                        <a href="#" target="_blank" class="btn btn-primary">Buy Now</a>
+                        <a href="#" target="_blank" class="btn btn-primary">Get eBook</a>
                     </div>
                 </div>
             </div>
@@ -282,21 +314,17 @@ You can copy this entire block of code, overwrite your current file, and save it
         </div>
     </section>
 
-    <!-- About Author Section -->
+    <!-- Redesigned Minimalist Author Section -->
     <section id="author" class="about-section">
         <div class="author-container">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Author Portrait" class="author-img">
-            <div>
-                <h2 style="color: var(--primary); margin-bottom: 15px;">About the Author</h2>
-                <p>Hello! I am the creator behind BookBug. I specialize in writing engaging stories and practical guides that help readers learn new concepts or escape into thrilling worlds. Thank you for supporting independent authors!</p>
-            </div>
+            <span class="author-label">The Creator</span>
+            <p class="author-quote">"This is Rupam, I write some stories for you guys to enjoy"</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 BookBug. All rights reserved.</p>
-        <p style="color: #888888; font-size: 11px; margin-top: 5px;">All transactions are processed securely via external verified platforms.</p>
+        <p>&copy; 2026 BookBug. Designed for modern readers.</p>
     </footer>
 
 </body>
