@@ -1,8 +1,74 @@
-Here is the code to create a single-page website for "The Tomorrow Trap."
+```python
+import PyPDF2
 
-This version uses a dedicated, modern landing page format to maximize focus on your book. I have also used the details from your manuscript to craft the book description, emphasizing the core concepts of procrastination as an emotional problem and your "Five Minute Brutality Rule".
+try:
+    with open('OUT OF THE SHADOWS (1).pdf', 'rb') as f:
+        reader = PyPDF2.PdfReader(f)
+        text = ""
+        for i in range(min(5, len(reader.pages))): # read first 5 pages to get the gist
+            text += reader.pages[i].extract_text() + "\n"
+    print(text[:2000])
+except Exception as e:
+    print("Error:", e)
 
-You can copy the code below, replace the contents of your `index.html` file, and upload it to GitHub.
+
+```
+
+```text
+To the student reading this at 3:00 AM,
+staring at a screen, wondering if it will ever get better .
+It will. This is for you.
+A QUICK NOTE
+The stories, tactics, and advice shared in this e-book are based entirely on my own deeply personal journey. I am a
+fellow student, not a medical professional, therapist, or psychiatrist. This book is meant to be a companion in the
+dark, not a substitute for professional medical help. If you are ever in immediate crisis, please reach out to a local
+health professional. You truly do not have to carry this alone.OUT OF THE
+SHADOWS
+A Student's Real, Raw Guide to Navigating Anxiety,
+Defeating Depression, and Finding the Light Again
+RUPAM MONDAL
+Table of Contents
+Introduction: My Story
+Understanding the Beast
+The Student Struggle: Why Us?
+Recognizing the Signs
+The Breaking Point
+Solution 1: Stepping into Therapy
+Solution 2: Taming the Mind (Grounding)
+Solution 3: The Physical Connection
+Solution 4: Academic Survival Tactics
+Solution 5: Finding Your Tribe
+Solution 6: Finding Small Escapes
+The Reality of Setbacks
+The Power of "No"
+My Daily Survival Toolkit
+Conclusion & About the Author
+2
+Introduction: My Story
+I remember staring at the glowing screen of my laptop late at night. It was an older i3
+model, practically wheezing as I tried to compile another batch of Java code in BlueJ. I
+was working on a project—trying to figure out the mathematical logic to identify special
+numbers and factorials—but the syntax errors just kept piling up.
+The red text on the screen blurred together . My heart was racing, yet I felt entirely
+paralyzed. On paper , I was just another student grinding away at backend development,
+hoping to eventually build something great, maybe even start freelancing as a seller on
+Fiverr . In my head, I was fighting a war that nobody else could see.
+For a long time, I thought I was just "stressed." I thought the exhaustion of debugging
+until 3 AM, the dread of waking up, and the heavy weight sitting on my chest were just
+nor
+
+
+```
+
+I have extracted the core themes from your newly uploaded book, **Out of the Shadows**, and updated the website to beautifully showcase *both* of your books side-by-side.
+
+I have also updated the image source links to match the exact file names of the thumbnails you uploaded.
+
+### Important Note for GitHub:
+
+To make sure the images show up on your live website, make sure you upload the two image files (`The_Tomorrow_Trap_Thumbnail.png` and `Out_Of_The_Shadows_Thumbnail.jpg`) into the **exact same folder** as your `index.html` file on GitHub.
+
+Here is your complete, updated code:
 
 ```html
 <!DOCTYPE html>
@@ -10,7 +76,7 @@ You can copy the code below, replace the contents of your `index.html` file, and
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tomorrow Trap | Rupam Mondal</title>
+    <title>BookBug | Rupam Mondal</title>
     <style>
         /* Modern CSS Reset & Variables */
         :root {
@@ -53,7 +119,7 @@ You can copy the code below, replace the contents of your `index.html` file, and
         }
 
         .nav-wrapper {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -71,6 +137,19 @@ You can copy the code below, replace the contents of your `index.html` file, and
 
         .brand-logo span {
             color: var(--primary);
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
         }
 
         /* Hero Banner */
@@ -94,76 +173,87 @@ You can copy the code below, replace the contents of your `index.html` file, and
             margin: 0 auto;
         }
 
-        /* Main Container - Single Book Layout */
+        /* Main Container */
         main {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px 20px 80px;
+            padding: 40px 20px 80px;
         }
 
-        .featured-book-card {
+        .section-header {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 50px;
+            color: var(--text-main);
+        }
+
+        /* Book Grid Layout */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .book-card {
             background-color: var(--bg-surface);
             border-radius: 16px;
             border: 1px solid var(--border-color);
             overflow: hidden;
             display: flex;
-            flex-direction: row;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .book-image-wrapper {
-            flex: 0 0 45%;
+        .book-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
         }
 
         .book-cover {
             width: 100%;
-            height: 100%;
-            min-height: 500px;
+            height: 450px;
             object-fit: cover;
-            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .book-details {
-            padding: 50px 40px;
+            padding: 35px 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            flex: 1;
+            flex-grow: 1;
         }
 
         .book-subtitle {
             color: var(--primary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 700;
-            margin-bottom: 15px;
-            display: block;
+            margin-bottom: 10px;
         }
 
         .book-title {
-            font-size: 2.4rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             line-height: 1.2;
             letter-spacing: -0.5px;
         }
 
         .book-desc {
             color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
             line-height: 1.7;
-        }
-
-        .book-desc strong {
-            color: var(--text-main);
         }
 
         /* Call to Action Button */
         .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 16px 30px;
+            display: block;
+            width: 100%;
+            padding: 14px 0;
             text-align: center;
             text-decoration: none;
             background-color: var(--primary);
@@ -171,7 +261,6 @@ You can copy the code below, replace the contents of your `index.html` file, and
             font-weight: 600;
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .btn:hover {
@@ -223,24 +312,9 @@ You can copy the code below, replace the contents of your `index.html` file, and
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .nav-wrapper { flex-direction: column; gap: 15px; }
-            
-            .featured-book-card {
-                flex-direction: column;
-            }
-            .book-image-wrapper {
-                flex: none;
-            }
-            .book-cover {
-                min-height: 350px;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-            .book-details {
-                padding: 30px 20px;
-            }
-            .book-title {
-                font-size: 1.8rem;
-            }
+            .nav-links a { margin: 0 15px; }
+            .book-cover { height: 350px; }
+            .book-title { font-size: 1.5rem; }
             .author-quote { font-size: 1.2rem; }
         }
     </style>
@@ -250,30 +324,46 @@ You can copy the code below, replace the contents of your `index.html` file, and
     <header>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Book<span>Bug</span></a>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#library">eBooks</a>
+                <a href="#about">Author</a>
+            </nav>
         </div>
     </header>
 
     <section class="hero">
         <h1>Welcome to BookBug</h1>
-        <p>A Journey Through the Shadows of Delay to the Light of Execution.</p>
+        <p>Explore raw, real stories and practical guides designed to help you navigate life's challenges and build your best self.</p>
     </section>
 
-    <main id="book">
-        <div class="featured-book-card">
-            <div class="book-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="The Tomorrow Trap Book Cover" class="book-cover">
-            </div>
+    <main id="library">
+        <h2 class="section-header">Featured Releases</h2>
+        
+        <div class="book-grid">
             
-            <div class="book-details">
-                <span class="book-subtitle">By Rupam Mondal</span>
-                <h2 class="book-title">The Tomorrow Trap</h2>
+            <article class="book-card">
+                <img src="The_Tomorrow_Trap_Thumbnail.png" alt="The Tomorrow Trap Cover" class="book-cover">
                 
-                [cite_start]<p class="book-desc">Procrastination is often mocked as a simple bad habit, but it is a psychological paralysis—an agonizing thriller where the monster is yourself[cite: 23]. [cite_start]<em>The Tomorrow Trap</em> is the raw, unvarnished story of building an elaborate cage called "Tomorrow," and how to break the bars[cite: 20].</p>
+                <div class="book-details">
+                    <span class="book-subtitle">Overcoming Procrastination</span>
+                    <h3 class="book-title">The Tomorrow Trap</h3>
+                    <p class="book-desc">Procrastination is often mocked as a simple bad habit, but it is a psychological paralysis—an agonizing thriller where the monster is yourself. Learn to conquer the architecture of delay, dismantle your illusions of perfection, and master the <strong>Five Minute Brutality Rule</strong>. Step out of the cage and build your empire today.</p>
+                    <a href="#" target="_blank" class="btn">Get eBook</a>
+                </div>
+            </article>
+
+            <article class="book-card">
+                <img src="Out_Of_The_Shadows_Thumbnail.jpg" alt="Out of the Shadows Cover" class="book-cover">
                 
-                [cite_start]<p class="book-desc">Learn to conquer the architecture of delay, dismantle your illusions of perfection, and master the <strong>Five Minute Brutality Rule</strong>[cite: 131]. [cite_start]Step out of the cage and build your empire today, or prepare to mourn it tomorrow[cite: 172].</p>
-                
-                <a href="#" target="_blank" class="btn">Get the eBook Now</a>
-            </div>
+                <div class="book-details">
+                    <span class="book-subtitle">Navigating Mental Health</span>
+                    <h3 class="book-title">Out of the Shadows</h3>
+                    <p class="book-desc">A real, raw guide to navigating anxiety, defeating depression, and finding the light again. Written from the perspective of a fellow student fighting the silent war behind a screen at 3 AM, this book offers actionable survival toolkits, grounding tactics, and academic strategies to help you breathe, survive, and succeed.</p>
+                    <a href="#" target="_blank" class="btn">Get eBook</a>
+                </div>
+            </article>
+
         </div>
     </main>
 
@@ -283,7 +373,7 @@ You can copy the code below, replace the contents of your `index.html` file, and
     </section>
 
     <footer>
-        <p>&copy; 2026 Rupam Mondal. [cite_start]All rights reserved[cite: 5, 6].</p>
+        <p>&copy; 2026 Rupam Mondal. All rights reserved.</p>
     </footer>
 
 </body>
